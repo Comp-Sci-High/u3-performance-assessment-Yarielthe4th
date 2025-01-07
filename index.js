@@ -2,7 +2,10 @@
 const express = require('express');
 const app = express()
 
-{
+let dogs = {
+  doglist: [
+    "Herding","Sporting","Working","Toy","Non-Sporting","Hound","Terrier","Mastiff","Doodle","SightHound"
+  ],
     classes: [
       {
         name: "Herding",
@@ -13,7 +16,7 @@ const app = express()
       },
       {
         name: "Sporting",
-        dog: "Labrador Retriever,",
+        dog: "Labrador Retriever",
         photo:"https://cdn.britannica.com/82/232782-050-8062ACFA/Black-labrador-retriever-dog.jpg",
         description: "Sporting dogs are energetic and enthusiastic, making them excellent companions for activities like hunting and water sports. They are known for their love of outdoor adventures.",
         fun_fact: "Labrador Retrievers are consistently ranked as one of the most popular breeds in the United States."
@@ -34,7 +37,7 @@ const app = express()
       },
       {
         name: "Non-Sporting",
-        dog: " Dalmatian,",
+        dog: " Dalmatian",
         photo: "https://cdn.britannica.com/47/236047-050-F06BFC5E/Dalmatian-dog.jpg",
         description: "Non-sporting dogs are a diverse group, including breeds with different characteristics and roles. Some are companion dogs, while others have working backgrounds, often excelling in companionship and obedience.",
         fun_fact: "Dalmatians are famous for their spots, and they were originally bred to accompany fire trucks as carriage dogs."
@@ -48,7 +51,7 @@ const app = express()
       },
       {
         name: "Terrier",
-        dog: "Jack Russell Terrier,",
+        dog: "Jack Russell Terrier",
         photo: "https://cdn.britannica.com/21/234921-050-5B888CF3/Parson-Jack-Russell-Terrier-dog-smooth-coat-head.jpg",
         description: "Terriers are feisty and courageous, known for their energetic and determined nature. They were originally bred to hunt small animals and pests.",
         fun_fact: "The Jack Russell Terrier is incredibly energetic and can jump over 5 feet high!"
@@ -90,7 +93,18 @@ app.get("/home",(req,res)=>{
 })
 
 app.get("/docs",(req,res)=>{
-    res.send("<ul>herding</ul><li>Border Collie</li>","<ul>herding</ul><li>Border Collie</li>","<ul>herding</ul><li>Border Collie</li>","<ul>herding</ul><li>Border Collie</li>","<ul>herding</ul><li>Border Collie</li>","<ul>herding</ul><li>Border Collie</li>","<ul>herding</ul><li>Border Collie</li>","<ul>herding</ul><li>Border Collie</li>","<ul>herding</ul><li>Border Collie</li>","<ul>herding</ul><li>Border Collie</li>")
+    res.send("go to /dname to get the list of dogs and put / with a number to get a photo of the dog and the fact about them ")
+})
+
+
+app.get("/dname",(req,res)=>{
+  res.json(dogs.doglist)
+})
+
+
+app.get("/dname/:index",(req,res)=>{
+  const index = req.params.index
+  res.json(dogs.classes[index])
 })
 
 
@@ -110,9 +124,6 @@ app.get("/docs",(req,res)=>{
 
 
 
-
-
-
-
-
-
+app.listen(3000,()=>{
+  console.log("sever is running")
+})
